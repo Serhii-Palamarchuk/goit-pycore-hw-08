@@ -3,6 +3,7 @@
 
 from collections import UserDict
 from datetime import datetime, timedelta
+import pickle
 
 class Field:
     def __init__(self, value):
@@ -177,6 +178,37 @@ class AddressBook(UserDict):
 
         return result
 
+    def save_data(self, filename="addressbook.pkl"):
+        """
+        Save the current instance of the AddressBook class to a file.
+
+        Parameters:
+        - filename (str): The name of the file to save the data to. Default is "addressbook.pkl".
+
+        Returns:
+        None
+        """
+        with open(filename, "wb") as f:
+            pickle.dump(self, f)
+
+    @staticmethod
+    def load_data(filename="addressbook.pkl"):
+        """
+        Load data from a file.
+
+        Args:
+            filename (str): The name of the file to load data from. Defaults to "addressbook.pkl".
+
+        Returns:
+            AddressBook: The loaded address book if the file exists, otherwise a new address book.
+
+        """
+        try:
+            with open(filename, "rb") as f:
+                return pickle.load(f)
+        except FileNotFoundError:
+            return AddressBook()
+        
 if __name__ == "__main__":
     book = AddressBook()
 

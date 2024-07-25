@@ -201,7 +201,7 @@ def main():
     """
     The main function of the assistant bot program.
     """
-    book = AddressBook()
+    book = AddressBook.load_data()  # Завантаження даних при запуску програми
     print("Welcome to the assistant bot!")
     print("Available commands:")
     print("add [ім'я] [телефон]: Додати або новий контакт з іменем та телефонним номером, або телефонний номер к контакту який вже існує.")
@@ -212,12 +212,13 @@ def main():
     print("show-birthday [ім'я]: Показати дату народження для вказаного контакту.")
     print("birthdays: Показати дні народження, які відбудуться протягом наступного тижня.")
     print("hello: Отримати вітання від бота.")
-    print("close або exit: Закрити програму.")
+    print("close або exit: Закрити програму.")    
     while True:
         user_input = input("Enter a command: ")
         command, args = parse_input(user_input)
 
         if command in ["close", "exit"]:
+            book.save_data()  # Збереження даних перед виходом
             print("Good bye!")
             break
         elif command == "hello":
