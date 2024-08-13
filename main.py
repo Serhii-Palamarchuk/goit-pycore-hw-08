@@ -17,6 +17,7 @@ def input_error(func):
     KeyError: If a key error occurs.
     ValueError: If a value error occurs.
     IndexError: If an index error occurs.
+    
     Exception: If any other exception occurs.
     """
     def inner(*args, **kwargs):
